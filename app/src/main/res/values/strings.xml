@@ -4,4 +4,6 @@
     <string name="title_home">Home</string>
     <string name="Search">Search</string>
     <string name="title_favorites">Favorites</string>
+    <string name="title_popular">Popular</string>
+    <string name="title_releases">Lançamentos</string>
 </resources>
