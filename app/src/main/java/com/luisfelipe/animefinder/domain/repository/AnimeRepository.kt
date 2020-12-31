@@ -5,4 +5,6 @@ import com.luisfelipe.animefinder.domain.model.Anime
 
 interface AnimeRepository {
     suspend fun getPopularAnimes(): RequestStatus<List<Anime>>
+    suspend fun getLatestAnimes(): RequestStatus<List<Anime>>
+    suspend fun getUpcomingAnimes(): RequestStatus<List<Anime>>
 }

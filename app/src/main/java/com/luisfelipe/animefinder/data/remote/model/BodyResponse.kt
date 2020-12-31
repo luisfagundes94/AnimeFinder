@@ -6,5 +6,5 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class BodyResponse(
     @Json(name = "top")
-    val popularAnimes: List<AnimeResponse>
+    val animes: List<AnimeResponse>
 )

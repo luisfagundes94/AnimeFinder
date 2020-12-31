@@ -9,4 +9,10 @@ interface JikanService {
     @GET("top/anime/1/bypopularity")
     suspend fun getPopularAnimes(): Response<BodyResponse>
 
+    @GET("top/anime/1/airing")
+    suspend fun getLatestAnimes(): Response<BodyResponse>
+
+    @GET("top/anime/1/upcoming")
+    suspend fun getUpcomingAnimes(): Response<BodyResponse>
+
 }

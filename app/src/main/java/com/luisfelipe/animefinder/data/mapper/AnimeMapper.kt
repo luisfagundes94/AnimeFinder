@@ -9,6 +9,7 @@ class AnimeMapper {
             val animeList = mutableListOf<Anime>()
             for (animeResponse in animeResponseList) {
                 val anime = Anime(
+                    id = animeResponse.id,
                     title = animeResponse.title,
                     imageUrl = animeResponse.image_url,
                     episodes = animeResponse.episodes ?: 0,

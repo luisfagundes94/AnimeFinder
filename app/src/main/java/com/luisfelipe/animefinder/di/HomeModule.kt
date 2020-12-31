@@ -13,8 +13,18 @@ import javax.inject.Named
 object HomeModule {
 
     @ActivityScoped
-    @Named("animeAdapter")
+    @Named("popularAnimesAdapter")
     @Provides
-    fun provideAnimeAdapter() = AnimeAdapter()
+    fun providePopularAnimesAdapter() = AnimeAdapter()
+
+    @ActivityScoped
+    @Named("latestAnimesAdapter")
+    @Provides
+    fun provideLatestAnimesAdapter() = AnimeAdapter()
+
+    @ActivityScoped
+    @Named("upcomingAnimesAdapter")
+    @Provides
+    fun provideUpcomingAnimesAdapter() = AnimeAdapter()
 
 }

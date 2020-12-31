@@ -10,13 +10,12 @@ import com.luisfelipe.animefinder.domain.repository.AnimeRepository
 import kotlinx.coroutines.withTimeout
 import retrofit2.Response
 import java.lang.Exception
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 import javax.inject.Named
 
 class AnimeRepositoryImpl @Inject constructor(
     @Named("service") val jikanService: JikanService
-): AnimeRepository {
+) : AnimeRepository {
 
     private companion object {
         private const val MIN_RESPONSE_CODE = 200
@@ -25,26 +24,32 @@ class AnimeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getPopularAnimes(): RequestStatus<List<Anime>> {
+        return getAnimes(jikanService.getPopularAnimes())
+    }
+
+    override suspend fun getLatestAnimes(): RequestStatus<List<Anime>> {
+        return getAnimes(jikanService.getLatestAnimes())
+    }
+
+    override suspend fun getUpcomingAnimes(): RequestStatus<List<Anime>> {
+        return getAnimes(jikanService.getUpcomingAnimes())
+    }
+
+    private suspend fun getAnimes(bodyResponse: Response<BodyResponse>): RequestStatus<List<Anime>> {
         return withTimeout(REQUEST_TIMEOUT) {
             try {
-                val bodyResponse = jikanService.getPopularAnimes()
                 if (bodyResponse.code() in MIN_RESPONSE_CODE..MAX_RESPONSE_CODE) {
-                    printResponseUrl(bodyResponse)
-                    val topAnimeResponseList = bodyResponse.body()?.popularAnimes
-                    val topAnimes = topAnimeResponseList?.let { AnimeMapper.mapResponseToDomain(it) }
-                    return@withTimeout RequestStatus.Success(topAnimes as List<Anime>)
+                    val animeResponseList = bodyResponse.body()?.animes
+                    val animes =
+                        animeResponseList?.let { AnimeMapper.mapResponseToDomain(it) }
+                    return@withTimeout RequestStatus.Success(animes as List<Anime>)
                 } else {
-                    printResponseUrl(bodyResponse)
                     return@withTimeout RequestStatus.Error(bodyResponse.message())
                 }
             } catch (exception: Exception) {
-                throw IllegalArgumentException(exception)
+                Log.d("getAnimes", exception.message.toString())
                 return@withTimeout RequestStatus.Error(exception.message.toString())
             }
         }
-    }
-
-    private fun printResponseUrl(response: Response<BodyResponse>) {
-        Log.d("getPopularAnimes", response.raw().request.url.toString())
     }
 }

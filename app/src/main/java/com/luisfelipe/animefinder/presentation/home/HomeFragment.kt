@@ -19,9 +19,17 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
     private val viewModel: HomeViewModel by viewModels()
 
+    @Named("popularAnimesAdapter")
     @Inject
-    @Named("animeAdapter")
     lateinit var popularAnimesAdapter: AnimeAdapter
+
+    @Named("latestAnimesAdapter")
+    @Inject
+    lateinit var latestAnimesAdapter: AnimeAdapter
+
+    @Named("upcomingAnimesAdapter")
+    @Inject
+    lateinit var upcomingAnimesAdapter: AnimeAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,9 +37,13 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
 
         initPopularAnimesRecyclerView()
+        initLatestAnimesRecyclerView()
+        initUpcomingAnimesRecyclerView()
         initViewModelObservers()
 
         viewModel.getPopularAnimes()
+        viewModel.getLatestAnimes()
+        viewModel.getUpcomingAnimes()
     }
 
     private fun initPopularAnimesRecyclerView() {
@@ -42,10 +54,32 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         }
     }
 
+    private fun initLatestAnimesRecyclerView() {
+        binding.recyclerViewReleases.apply {
+            setHasFixedSize(true)
+            layoutManager = horizontalRecyclerViewLayout()
+            adapter = latestAnimesAdapter
+        }
+    }
+
+    private fun initUpcomingAnimesRecyclerView() {
+        binding.recyclerViewUpcoming.apply {
+            setHasFixedSize(true)
+            layoutManager = horizontalRecyclerViewLayout()
+            adapter = upcomingAnimesAdapter
+        }
+    }
+
     private fun initViewModelObservers() {
         viewModel.apply {
             popularAnimes.observe(viewLifecycleOwner, { popularAnimes ->
                 popularAnimesAdapter.updateAnimes(popularAnimes)
+            })
+            latestAnimes.observe(viewLifecycleOwner, { latestAnimes ->
+                latestAnimesAdapter.updateAnimes(latestAnimes)
+            })
+            upcomingAnimes.observe(viewLifecycleOwner, { upcomingAnimes ->
+                upcomingAnimesAdapter.updateAnimes(upcomingAnimes)
             })
         }
     }
