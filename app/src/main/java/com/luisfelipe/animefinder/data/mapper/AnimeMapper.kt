@@ -13,11 +13,22 @@ class AnimeMapper {
                     title = animeResponse.title,
                     imageUrl = animeResponse.image_url,
                     episodes = animeResponse.episodes ?: 0,
-                    score = animeResponse.score
+                    score = animeResponse.score,
                 )
                 animeList.add(anime)
             }
             return animeList
+        }
+
+        fun mapResponseToDomain(animeDetailsResponse: AnimeResponse): Anime {
+            return Anime(
+                id = animeDetailsResponse.id,
+                title = animeDetailsResponse.title,
+                imageUrl = animeDetailsResponse.image_url,
+                episodes = animeDetailsResponse.episodes ?: 0,
+                score = animeDetailsResponse.score,
+                summary = animeDetailsResponse.synopsis
+            )
         }
     }
 }

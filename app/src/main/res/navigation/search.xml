@@ -6,5 +6,5 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.luisfelipe.animefinder.presentation.search.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="@string/title_search" />
 </navigation>

@@ -35,6 +35,21 @@ class AnimeRepositoryImpl @Inject constructor(
         return getAnimes(jikanService.getUpcomingAnimes())
     }
 
+    override suspend fun getAnimeDetails(id: Int): RequestStatus<Anime> {
+        return withTimeout(REQUEST_TIMEOUT) {
+            try {
+                val response = jikanService.getAnimeDetails(id)
+                if (response.code() in MIN_RESPONSE_CODE..MAX_RESPONSE_CODE) {
+                    val anime = response.body()?.let { AnimeMapper.mapResponseToDomain(it) }
+                    return@withTimeout RequestStatus.Success(anime as Anime)
+                } else return@withTimeout RequestStatus.Error(response.message())
+            } catch (exception: Exception) {
+                Log.d("getAnimeDetails", exception.message.toString())
+                return@withTimeout RequestStatus.Error(exception.message.toString())
+            }
+        }
+    }
+
     private suspend fun getAnimes(bodyResponse: Response<BodyResponse>): RequestStatus<List<Anime>> {
         return withTimeout(REQUEST_TIMEOUT) {
             try {

@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.luisfelipe.animefinder.R
 import com.luisfelipe.animefinder.databinding.FragmentHomeBinding
 import com.luisfelipe.animefinder.utils.horizontalRecyclerViewLayout
@@ -83,26 +85,22 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     }
 
     private fun initPopularAnimesRecyclerView() {
-        binding.recyclerViewPopular.apply {
-            setHasFixedSize(true)
-            layoutManager = horizontalRecyclerViewLayout()
-            adapter = popularAnimesAdapter
-        }
+        setUpRecyclerView(binding.recyclerViewPopular, popularAnimesAdapter)
     }
 
     private fun initLatestAnimesRecyclerView() {
-        binding.recyclerViewReleases.apply {
-            setHasFixedSize(true)
-            layoutManager = horizontalRecyclerViewLayout()
-            adapter = latestAnimesAdapter
-        }
+        setUpRecyclerView(binding.recyclerViewReleases, latestAnimesAdapter)
     }
 
     private fun initUpcomingAnimesRecyclerView() {
-        binding.recyclerViewUpcoming.apply {
+        setUpRecyclerView(binding.recyclerViewUpcoming, upcomingAnimesAdapter)
+    }
+
+    private fun setUpRecyclerView(recyclerView: RecyclerView, customAdapter: AnimeAdapter) {
+        recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = horizontalRecyclerViewLayout()
-            adapter = upcomingAnimesAdapter
+            adapter = customAdapter
         }
     }
 
@@ -127,7 +125,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     }
 
     override fun onDestroy() {
-        Log.d("onDestroy", "fui chamado")
         _binding = null
         super.onDestroy()
     }
