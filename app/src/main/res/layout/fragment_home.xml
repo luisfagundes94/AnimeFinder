@@ -6,7 +6,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark_background"
         tools:context=".presentation.home.HomeFragment">
 
         <TextView
@@ -22,15 +21,15 @@
             android:id="@+id/recycler_view_popular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_margin="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_popular" />
 
         <TextView
             android:id="@+id/title_releases"
-            android:layout_width="wrap_content"
             style="@style/Title"
+            android:layout_width="wrap_content"
             android:layout_margin="32dp"
             android:text="@string/title_releases"
             app:layout_constraintStart_toStartOf="parent"

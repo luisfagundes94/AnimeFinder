@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="dark_background">#1e2226</color>
-    <color name="orange">#f6894e</color>
+    <color name="purple">#7c4dff</color>
+    <color name="dark_purple">#3f1dcb</color>
     <color name="white">#FFF</color>
+    <color name="black">#CB000000</color>
 </resources>
