@@ -4,16 +4,19 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_baseline_home_24"
+        android:contentDescription="@string/title_home"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_search"
         android:icon="@drawable/ic_baseline_search_24"
-        android:title="@string/Search" />
+        android:contentDescription="@string/title_search"
+        android:title="@string/title_search" />
 
     <item
         android:id="@+id/navigation_favorites"
         android:icon="@drawable/ic_baseline_favorite_24"
+        android:contentDescription="@string/title_favorites"
         android:title="@string/title_favorites" />
 
 </menu>
