@@ -46,6 +46,28 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         viewModel.getUpcomingAnimes()
     }
 
+    override fun onResume() {
+        super.onResume()
+        startShimmerAnimation()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopShimmerAnimation()
+    }
+
+    private fun startShimmerAnimation() {
+        binding.shimmerViewContainer.startShimmer()
+        binding.shimmerViewContainer2.startShimmer()
+        binding.shimmerViewContainer3.startShimmer()
+    }
+
+    private fun stopShimmerAnimation() {
+        binding.shimmerViewContainer.stopShimmer()
+        binding.shimmerViewContainer2.stopShimmer()
+        binding.shimmerViewContainer3.stopShimmer()
+    }
+
     private fun initPopularAnimesRecyclerView() {
         binding.recyclerViewPopular.apply {
             setHasFixedSize(true)
@@ -80,6 +102,12 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             })
             upcomingAnimes.observe(viewLifecycleOwner, { upcomingAnimes ->
                 upcomingAnimesAdapter.updateAnimes(upcomingAnimes)
+            })
+            shimmerAnimation.observe(viewLifecycleOwner, { isEnabled ->
+                when (isEnabled) {
+                    true -> startShimmerAnimation()
+                    false -> stopShimmerAnimation()
+                }
             })
         }
     }

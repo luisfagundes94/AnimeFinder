@@ -80,7 +80,6 @@ dependencies {
     implementation "com.squareup.moshi:moshi:$moshi_version"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
 
-
     // Mockk
     def mockk_version = "1.10.0"
     testImplementation "io.mockk:mockk:$mockk_version"
@@ -95,6 +94,9 @@ dependencies {
     // Picasso
     def picasso_version = "2.71828"
     implementation "com.squareup.picasso:picasso:$picasso_version"
+
+    // Facebook Shimmer Effect
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

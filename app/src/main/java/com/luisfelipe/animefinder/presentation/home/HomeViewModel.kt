@@ -32,6 +32,9 @@ class HomeViewModel @ViewModelInject constructor(
     private val failedToFetchAnimesLiveData = MutableLiveData<Int>()
     val failedToFetchAnimes: LiveData<Int> = failedToFetchAnimesLiveData
 
+    private val shimmerAnimationLiveData = MutableLiveData<Boolean>()
+    val shimmerAnimation: LiveData<Boolean> = shimmerAnimationLiveData
+
     fun getPopularAnimes() = viewModelScope.launch {
         val requestStatus = getPopularAnimesFromApi()
         handleRequestStatus(requestStatus, popularAnimesLiveData)
@@ -52,8 +55,12 @@ class HomeViewModel @ViewModelInject constructor(
         animesLiveData: MutableLiveData<List<Anime>>
     ) {
         when (requestStatus) {
-            is RequestStatus.Success -> animesLiveData.postValue(requestStatus.data)
+            is RequestStatus.Success -> {
+                shimmerAnimationLiveData.postValue(false)
+                animesLiveData.postValue(requestStatus.data)
+            }
             is RequestStatus.Error -> {
+                shimmerAnimationLiveData.postValue(false)
                 failedToFetchAnimesLiveData.postValue(
                     R.string.warning_failed_to_fetch_popular_animes
                 )

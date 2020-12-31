@@ -3,4 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="title_size">24sp</dimen>
+    <dimen name="placeholderImageHeight">180dp</dimen>
+    <dimen name="placeholderImageWidth">130dp</dimen>
+    <dimen name="placeholderTextHeight">16dp</dimen>
 </resources>
