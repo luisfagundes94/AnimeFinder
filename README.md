@@ -14,3 +14,14 @@ A simple and modern android app to discover and search animes
 - **Dagger Hilt** - _Dependency Injection_
 - **Mockk** - _mocking library for Kotlin_
 - **Espresso** - _UI Testing_
+
+## Getting Started
+
+_Follow these instructions to build and run the project with mock data.._
+
+1. Clone this repository.
+2. [Install Android Studio](https://developer.android.com/sdk/index.html).
+3. Import the project. Open Android Studio, click `Open an existing Android
+   Studio project` and select the project. Gradle will build the project.
+4. Run the app. Click `Run > Run 'app'`. After the project builds you'll be
+   prompted to build or launch an emulator.
