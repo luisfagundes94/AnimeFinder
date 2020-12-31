@@ -17,7 +17,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
-object NetworkModule {
+object ApiModule {
 
     private const val JIKAN_BASE_URL = "https://api.jikan.moe/v3/"
 

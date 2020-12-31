@@ -12,7 +12,7 @@ import javax.inject.Named
 
 @Module
 @InstallIn(ApplicationComponent::class)
-object UseCasesModule {
+object UseCaseModule {
 
     @Named("getPopularAnimes")
     @Provides
