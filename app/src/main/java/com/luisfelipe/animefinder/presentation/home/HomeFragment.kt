@@ -32,19 +32,22 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     @Inject
     lateinit var upcomingAnimesAdapter: AnimeAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.getPopularAnimes()
+        viewModel.getLatestAnimes()
+        viewModel.getUpcomingAnimes()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHomeBinding.bind(view)
-
 
         initPopularAnimesRecyclerView()
         initLatestAnimesRecyclerView()
         initUpcomingAnimesRecyclerView()
         initViewModelObservers()
-
-        viewModel.getPopularAnimes()
-        viewModel.getLatestAnimes()
-        viewModel.getUpcomingAnimes()
     }
 
     override fun onResume() {
@@ -59,14 +62,24 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
     private fun startShimmerAnimation() {
         binding.shimmerViewContainer.startShimmer()
+        binding.shimmerViewContainer.visibility = View.VISIBLE
+
         binding.shimmerViewContainer2.startShimmer()
+        binding.shimmerViewContainer2.visibility = View.VISIBLE
+
         binding.shimmerViewContainer3.startShimmer()
+        binding.shimmerViewContainer3.visibility = View.VISIBLE
     }
 
     private fun stopShimmerAnimation() {
         binding.shimmerViewContainer.stopShimmer()
+        binding.shimmerViewContainer.visibility = View.INVISIBLE
+
         binding.shimmerViewContainer2.stopShimmer()
+        binding.shimmerViewContainer2.visibility = View.INVISIBLE
+
         binding.shimmerViewContainer3.stopShimmer()
+        binding.shimmerViewContainer3.visibility = View.INVISIBLE
     }
 
     private fun initPopularAnimesRecyclerView() {
