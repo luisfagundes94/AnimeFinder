@@ -69,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:textSize="@dimen/normalTextSize"
                 android:textStyle="bold"
                 tools:text="Kimi no na wa" />
 
@@ -77,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:textSize="@dimen/normalTextSize"
                 tools:text="Episodes" />
         </LinearLayout>
 
@@ -85,6 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="32dp"
+            android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/card_view_poster"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,12 +98,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/title_score" />
+                android:text="@string/title_score"
+                android:textSize="@dimen/normalTextSize" />
 
             <TextView
                 android:id="@+id/score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/score_background"
                 android:gravity="center"
@@ -109,6 +114,7 @@
                 android:paddingEnd="8dp"
                 android:paddingBottom="4dp"
                 android:textColor="@color/white"
+                android:textSize="@dimen/normalTextSize"
                 android:textStyle="bold"
                 tools:text="8.9" />
         </LinearLayout>
