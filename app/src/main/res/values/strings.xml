@@ -3,7 +3,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
-    <string name="title_favorites">Collection</string>
+    <string name="title_bookmarks">Bookmarks</string>
     <string name="title_popular">Popular</string>
     <string name="title_releases">Releases</string>
     <string name="details">Details</string>

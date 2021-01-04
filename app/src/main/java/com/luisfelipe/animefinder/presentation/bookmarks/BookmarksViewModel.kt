@@ -1,10 +1,10 @@
-package com.luisfelipe.animefinder.presentation.favorites
+package com.luisfelipe.animefinder.presentation.bookmarks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class FravoritesViewModel : ViewModel() {
+class BookmarksViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"
