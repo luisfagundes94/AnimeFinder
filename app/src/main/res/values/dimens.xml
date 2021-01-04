@@ -6,4 +6,5 @@
     <dimen name="placeholderImageHeight">180dp</dimen>
     <dimen name="placeholderImageWidth">130dp</dimen>
     <dimen name="placeholderTextHeight">16dp</dimen>
+    <dimen name="normalTextSize">16sp</dimen>
 </resources>

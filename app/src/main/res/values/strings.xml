@@ -17,4 +17,13 @@
     <string name="title_summary">Sinopse</string>
     <string name="desc_poster">Anime Poster</string>
     <string name="warning_under_construction">Em construção :(</string>
+    <string name="tab_title_overview">overview</string>
+    <string name="tab_title_extras">extras</string>
+    <string name="tab_title_episodes">episodes</string>
+    <string name="dynamic_episodes">Episodes: %d</string>
+    <string name="title_status">Status</string>
+    <string name="title_source">Source</string>
+    <string name="title_duration">Duration</string>
+    <string name="title_premiered">Premiered</string>
+    <string name="title_rating">Rating</string>
 </resources>

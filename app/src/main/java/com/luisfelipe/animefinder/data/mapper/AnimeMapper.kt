@@ -13,7 +13,7 @@ class AnimeMapper {
                     title = animeResponse.title,
                     imageUrl = animeResponse.image_url,
                     episodes = animeResponse.episodes ?: 0,
-                    score = animeResponse.score,
+                    score = animeResponse.score ?: 0.0f,
                 )
                 animeList.add(anime)
             }
@@ -24,10 +24,15 @@ class AnimeMapper {
             return Anime(
                 id = animeDetailsResponse.id,
                 title = animeDetailsResponse.title,
+                summary = animeDetailsResponse.synopsis ?: "",
                 imageUrl = animeDetailsResponse.image_url,
                 episodes = animeDetailsResponse.episodes ?: 0,
-                score = animeDetailsResponse.score,
-                summary = animeDetailsResponse.synopsis
+                score = animeDetailsResponse.score ?: 0.0f,
+                duration = animeDetailsResponse.duration ?: "",
+                status = animeDetailsResponse.status ?: "",
+                source = animeDetailsResponse.source ?: "",
+                premiered = animeDetailsResponse.premiered ?: "",
+                rating = animeDetailsResponse.rating ?: ""
             )
         }
     }

@@ -1,10 +1,10 @@
 package com.luisfelipe.animefinder.presentation.details
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import com.google.android.material.tabs.TabLayoutMediator
 import com.luisfelipe.animefinder.R
 import com.luisfelipe.animefinder.databinding.FragmentDetailsBinding
 import com.luisfelipe.animefinder.domain.model.Anime
@@ -15,10 +15,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailsFragment : Fragment(R.layout.fragment_details) {
 
-    private var _binding: FragmentDetailsBinding? = null
-    private val binding: FragmentDetailsBinding get() = _binding!!
+    private val viewModel: DetailsViewModel by activityViewModels()
 
-    private val viewModel: DetailsViewModel by viewModels()
+    private var _binding: FragmentDetailsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +31,29 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentDetailsBinding.bind(view)
 
+        initJobDetailsPagerAdapter()
+        initTabLayout()
         initViewModelObservers()
     }
+
+    private fun initTabLayout() {
+            val tabLayoutMediator =
+                TabLayoutMediator(
+                    binding.tabLayout, binding.viewPager2
+                ) { tab, position ->
+                    when (position) {
+                        0 -> tab.text = getString(R.string.tab_title_overview)
+                        1 -> tab.text = getString(R.string.tab_title_extras)
+                        2 -> tab.text = getString(R.string.tab_title_episodes)
+                    }
+                }
+            tabLayoutMediator.attach()
+    }
+
+    private fun initJobDetailsPagerAdapter() {
+        binding.viewPager2.adapter = DetailsViewPagerAdapter(requireActivity())
+    }
+
 
     private fun initViewModelObservers() {
         viewModel.apply {
@@ -42,17 +63,15 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setUpAnimeInfo(anime: Anime) {
         binding.title.text = anime.title
         binding.score.text = anime.score.toString()
-        binding.episodes.text = "Episodes: ${anime.episodes}"
+        binding.episodes.text = getString(R.string.dynamic_episodes, anime.episodes)
         binding.poster.load(anime.imageUrl)
-        binding.summary.text = anime.summary
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         _binding = null
+        super.onDestroy()
     }
 }
