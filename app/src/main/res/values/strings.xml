@@ -1,22 +1,22 @@
 <resources>
     <string name="app_name">AnimeFinder</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Início</string>
-    <string name="title_search">Procurar</string>
-    <string name="title_favorites">Favoritos</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_favorites">Collection</string>
     <string name="title_popular">Popular</string>
-    <string name="title_releases">Lançamentos</string>
-    <string name="details">Detalhes</string>
-    <string name="warning_failed_to_fetch_popular_animes">Falha ao buscar animes :(</string>
-    <string name="warning_failed_to_fetch_anime_details">Falha ao buscar detalhes de anime :(</string>
-    <string name="title_episodes">Episódios:</string>
-    <string name="title_upcoming">Próximos</string>
+    <string name="title_releases">Releases</string>
+    <string name="details">Details</string>
+    <string name="warning_failed_to_fetch_popular_animes">Failed to retrieve animes :(</string>
+    <string name="warning_failed_to_fetch_anime_details">Failed to retrieve anime details :(</string>
+    <string name="title_episodes">Episodes:</string>
+    <string name="title_upcoming">Upcoming</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_score">Score</string>
-    <string name="title_summary">Sinopse</string>
+    <string name="title_summary">Overview</string>
     <string name="desc_poster">Anime Poster</string>
-    <string name="warning_under_construction">Em construção :(</string>
+    <string name="warning_under_construction">Under construction :(</string>
     <string name="tab_title_overview">overview</string>
     <string name="tab_title_extras">extras</string>
     <string name="tab_title_episodes">episodes</string>
