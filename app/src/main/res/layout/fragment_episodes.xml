@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".presentation.details.episodes.EpisodesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_episodes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="eeeee" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>

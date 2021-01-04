@@ -1,10 +1,7 @@
 package com.luisfelipe.animefinder.di
 
 import com.luisfelipe.animefinder.domain.repository.AnimeRepository
-import com.luisfelipe.animefinder.domain.usecase.GetAnimeDetailsFromApi
-import com.luisfelipe.animefinder.domain.usecase.GetLatestAnimesFromApi
-import com.luisfelipe.animefinder.domain.usecase.GetPopularAnimesFromApi
-import com.luisfelipe.animefinder.domain.usecase.GetUpcomingAnimesFromApi
+import com.luisfelipe.animefinder.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,5 +31,10 @@ object UseCaseModule {
     @Provides
     fun provideAnimeDetails(@Named("animeRepository") repository: AnimeRepository) =
         GetAnimeDetailsFromApi(repository)
+
+    @Named("getAnimeEpisodes")
+    @Provides
+    fun provideAnimeEpisodes(@Named("animeRepository") repository: AnimeRepository) =
+        GetAnimeEpisodesFromApi(repository)
 
 }

@@ -25,6 +25,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
         val animeId = arguments?.getInt(ANIME_ID)
         viewModel.getAnimeDetails(animeId)
+        viewModel.getAnimeEpisodes(animeId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

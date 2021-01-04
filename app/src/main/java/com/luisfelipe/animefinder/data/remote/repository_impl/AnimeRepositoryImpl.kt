@@ -6,6 +6,7 @@ import com.luisfelipe.animefinder.data.remote.model.BodyResponse
 import com.luisfelipe.animefinder.data.service.JikanService
 import com.luisfelipe.animefinder.domain.enums.RequestStatus
 import com.luisfelipe.animefinder.domain.model.Anime
+import com.luisfelipe.animefinder.domain.model.Episode
 import com.luisfelipe.animefinder.domain.repository.AnimeRepository
 import kotlinx.coroutines.withTimeout
 import retrofit2.Response
@@ -45,6 +46,22 @@ class AnimeRepositoryImpl @Inject constructor(
                 } else return@withTimeout RequestStatus.Error(response.message())
             } catch (exception: Exception) {
                 Log.d("getAnimeDetails", exception.message.toString())
+                return@withTimeout RequestStatus.Error(exception.message.toString())
+            }
+        }
+    }
+
+    override suspend fun getAnimeEpisodes(animeId: Int): RequestStatus<List<Episode>> {
+        return withTimeout(REQUEST_TIMEOUT) {
+            try {
+                val response = jikanService.getAnimeEpisodes(animeId)
+                if (response.code() in MIN_RESPONSE_CODE..MAX_RESPONSE_CODE) {
+                    val episodes = response.body()
+                        ?.let { AnimeMapper.mapEpisodeResponseListToDomain(it.episodes) }
+                    return@withTimeout RequestStatus.Success(episodes as List<Episode>)
+                } else return@withTimeout RequestStatus.Error(response.message())
+            } catch (exception: Exception) {
+                Log.d("getAnimeEpisodes", exception.message.toString())
                 return@withTimeout RequestStatus.Error(exception.message.toString())
             }
         }

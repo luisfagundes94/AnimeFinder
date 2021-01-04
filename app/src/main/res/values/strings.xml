@@ -26,4 +26,5 @@
     <string name="title_duration">Duration</string>
     <string name="title_premiered">Premiered</string>
     <string name="title_rating">Rating</string>
+    <string name="warning_failed_to_retrieve_episodes">Failed to retrieve episodes :(</string>
 </resources>

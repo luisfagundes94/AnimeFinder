@@ -8,12 +8,15 @@ import androidx.lifecycle.viewModelScope
 import com.luisfelipe.animefinder.R
 import com.luisfelipe.animefinder.domain.enums.RequestStatus
 import com.luisfelipe.animefinder.domain.model.Anime
+import com.luisfelipe.animefinder.domain.model.Episode
 import com.luisfelipe.animefinder.domain.usecase.GetAnimeDetailsFromApi
+import com.luisfelipe.animefinder.domain.usecase.GetAnimeEpisodesFromApi
 import kotlinx.coroutines.launch
 import javax.inject.Named
 
 class DetailsViewModel @ViewModelInject constructor(
-    @Named("getAnimeDetails") private val getAnimeDetailsFromApi: GetAnimeDetailsFromApi
+    @Named("getAnimeDetails") private val getAnimeDetailsFromApi: GetAnimeDetailsFromApi,
+    @Named("getAnimeEpisodes") private val getAnimeEpisodesFromApi: GetAnimeEpisodesFromApi
 ) : ViewModel() {
 
     private val animeDetailsLiveData = MutableLiveData<Anime>()
@@ -22,16 +25,39 @@ class DetailsViewModel @ViewModelInject constructor(
     private val failedToGetAnimeDetailsLiveData = MutableLiveData<Int>()
     val failedToGetAnimeDetails: LiveData<Int> = failedToGetAnimeDetailsLiveData
 
-    fun getAnimeDetails(id: Int?) = viewModelScope.launch {
-        if (id != null) {
+    private val episodesLiveData = MutableLiveData<List<Episode>>()
+    val episodes: LiveData<List<Episode>> = episodesLiveData
+
+    private val failedToGetEpisodesLiveData = MutableLiveData<Int>()
+    val failedToGetEpisodes: LiveData<Int> = failedToGetEpisodesLiveData
+
+    fun getAnimeDetails(animeId: Int?) = viewModelScope.launch {
+        animeId?.let { id ->
             val requestStatus = getAnimeDetailsFromApi(id)
-            handleRequestStatus(requestStatus)
+            handleAnimeRequestStatus(requestStatus)
         }
     }
 
-    private fun handleRequestStatus(requestStatus: RequestStatus<Anime>) {
+    fun getAnimeEpisodes(animeId: Int?) = viewModelScope.launch {
+        animeId?.let { id ->
+            val requestStatus = getAnimeEpisodesFromApi(id)
+            handleEpisodesRequestStatus(requestStatus)
+        }
+    }
+
+    private fun handleAnimeRequestStatus(requestStatus: RequestStatus<Anime>) {
         when (requestStatus) {
             is RequestStatus.Success -> animeDetailsLiveData.postValue(requestStatus.data)
+            is RequestStatus.Error -> {
+                failedToGetAnimeDetailsLiveData.postValue(R.string.warning_failed_to_fetch_anime_details)
+            }
+            is RequestStatus.InProgress -> {}
+        }
+    }
+
+    private fun handleEpisodesRequestStatus(requestStatus: RequestStatus<List<Episode>>) {
+        when (requestStatus) {
+            is RequestStatus.Success -> episodesLiveData.postValue(requestStatus.data)
             is RequestStatus.Error -> {
                 failedToGetAnimeDetailsLiveData.postValue(R.string.warning_failed_to_fetch_anime_details)
             }

@@ -1,7 +1,9 @@
 package com.luisfelipe.animefinder.data.mapper
 
 import com.luisfelipe.animefinder.data.remote.model.AnimeResponse
+import com.luisfelipe.animefinder.data.remote.model.EpisodeResponse
 import com.luisfelipe.animefinder.domain.model.Anime
+import com.luisfelipe.animefinder.domain.model.Episode
 
 class AnimeMapper {
     companion object {
@@ -34,6 +36,20 @@ class AnimeMapper {
                 premiered = animeDetailsResponse.premiered ?: "",
                 rating = animeDetailsResponse.rating ?: ""
             )
+        }
+
+        fun mapEpisodeResponseListToDomain(episodeResponseList: List<EpisodeResponse>): List<Episode> {
+            val episodes = mutableListOf<Episode>()
+            for (episodeResponse in episodeResponseList) {
+                val episode = Episode(
+                    episode_id = episodeResponse.episode_id,
+                    title = episodeResponse.title,
+                    releaseDate = episodeResponse.aired,
+                    isFiller = episodeResponse.filler
+                )
+                episodes.add(episode)
+            }
+            return episodes
         }
     }
 }

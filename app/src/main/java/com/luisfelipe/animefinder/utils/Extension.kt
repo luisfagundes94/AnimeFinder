@@ -12,6 +12,8 @@ import com.squareup.picasso.Picasso
 
 fun Fragment.horizontalRecyclerViewLayout() = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
+fun Fragment.verticalRecyclerViewLayout() = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
 fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this.context, message, duration).show()
 }
